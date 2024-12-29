@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js" 
+            integrity="sha512-UkPKEzcWAtZep3yOGH8vkDWMScvD17nRJz6P+4Hy8RCcLknZ5HjmDowRkyRm8D2v4GFJ8d1TZ6Ezy14vfnNbtg==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Real-time Data Display</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Real Time Prediction</h1>
+        
+        <!-- Display the last record fetched from HBase -->
+        <ul id="record-list">
+            {% if last_record %}
+                {% for key, value in last_record.items() %}
+                    <li>
+                        <strong>{{ key }}:</strong> 
+                        {% if key == 'Price' %}
+                            <span class="price">{{ value }}</span> DH 
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No data available</li>
+            {% endif %}
+        </ul>
+
+        <!-- Real-time Chatbot Interaction Section -->
+        <div id="chatbot-container">
+            <h2>Ask a question:</h2>
+            <input type="text" id="user-query" placeholder="Enter your question" />
+            <button id="ask-btn">Ask</button>
+
+            <h3>Response:</h3>
+            <div id="chatbot-response">
+                <p>Waiting for your query...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Handle user query submission and interaction with chatbot API
+        document.getElementById('ask-btn').addEventListener('click', async function() {
+            const query = document.getElementById('user-query').value;
+            if (query) {
+                // Send the query to the Flask API using fetch
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query }),
+                });
+
+                // Parse and display the response
+                const result = await response.json();
+                const responseText = result.response || "Sorry, I couldn't understand the query.";
+
+                document.getElementById('chatbot-response').innerHTML = `<p>${responseText}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

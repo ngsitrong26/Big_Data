@@ -1,0 +1,86 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px; /* Increased margin for title */
+    color: #333; /* Dark gray title color */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px; /* Increased margin between list items */
+}
+
+li strong {
+    font-weight: bold;
+    margin-right: 15px;
+    color: #333; /* Dark gray label color */
+}
+
+.price {
+    color: #e74c3c; /* Red color for price */
+    font-weight: bold; /* Bold font for price */
+}
+
+#chatbot-container {
+    margin-top: 30px;
+    background-color: #f1f1f1; /* Light background for the chatbot area */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#chatbot-container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#user-query {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px; /* Space between input and button */
+}
+
+#ask-btn {
+    background-color: #3498db; /* Blue button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#ask-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+#chatbot-response p {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
